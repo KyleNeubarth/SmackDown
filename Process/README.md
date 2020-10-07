@@ -23,6 +23,11 @@ So there is a dilemma here, the game could either lean into the arcade action-y 
 - Jumping on an enemy will kill it and send bullets flying out from it in certain directions which will kill other enemies
 - Enemies will move and/or shoot at the player to attack them
 
+##playtesting notes
+Need to figure out verticality of the environment, it seems like you should be able to jump onto obstacles since your jump is so high.
+Would be cool to jump onto platforms but that might make gameplay boring if you can escape enemies by jumping onto a ledge. Fix would be that platforms sink with each jump, enemies can cause platforms to sink?
+Need to think about how dangerous it will be when running into enemies, should shockwave push them away instead of damage them?
+
 
 **Tutorials I used:**
 

@@ -112,6 +112,17 @@ public class PlayerController : MonoBehaviour
                 _shockwave.SetActive(true);
                 
                 jumping = JumpState.ENDING;
+                
+                //did I land on solid ground?
+                RaycastHit hit;
+                if (Physics.Raycast(transform.position,Vector3.forward,out hit, 1,LayerMask.GetMask("Environment")))
+                {
+                    Debug.Log("solid ground!");
+                }
+                else
+                {
+                    Debug.Log("falling!!");
+                }
             }
             else
             {

@@ -1,5 +1,5 @@
-﻿#Project Smackdown#
-###An experimental smash 'em up arena###
+﻿*Project Smackdown*
+***An experimental smash 'em up arena***
 
 When thinking about ideas for shmups, one of the questions I kept coming back to was "what if I remove something that is normally considered vital to a game in the genre?"
 The idea I decided on was a game where you defeat enemies by ground pounding them and using their shrapnel to kill other enemies. Therefore a "shmup without bullets".
@@ -24,11 +24,7 @@ So there is a dilemma here, the game could either lean into the arcade action-y 
 - Enemies will move and/or shoot at the player to attack them
 
 
-##9/30, enemies and other thoughts
-What should enemeies 
-
-
-##Tutorials I used:
+**Tutorials I used:**
 
 - Top down 2d player controller: https://www.youtube.com/watch?v=yfsqai3ivyA
 - Parabola code for the jump: https://www.youtube.com/watch?v=ddakS7BgHRI

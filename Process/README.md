@@ -29,4 +29,5 @@ So there is a dilemma here, the game could either lean into the arcade action-y 
 - Top down 2d player controller: https://www.youtube.com/watch?v=yfsqai3ivyA
 - Parabola code for the jump: https://www.youtube.com/watch?v=ddakS7BgHRI
 - Jump bar: https://www.youtube.com/watch?v=BLfNP4Sc_iA
+- Probuilder tutorial: https://www.youtube.com/watch?v=YtzIXCKr8Wo
 

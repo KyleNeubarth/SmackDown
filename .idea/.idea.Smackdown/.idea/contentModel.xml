@@ -12,6 +12,7 @@
             <e p="ParabolaController.cs" t="Include" />
           </e>
           <e p="Bullet.cs" t="Include" />
+          <e p="Clock.cs" t="Include" />
           <e p="Destructable.cs" t="Include" />
           <e p="HealthBar.cs" t="Include" />
           <e p="PlayerController.cs" t="Include" />

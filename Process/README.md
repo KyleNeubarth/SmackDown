@@ -1,5 +1,5 @@
-﻿*Project Smackdown*
-***An experimental smash 'em up arena***
+# Project Smackdown
+## An experimental smash 'em up arena
 
 When thinking about ideas for shmups, one of the questions I kept coming back to was "what if I remove something that is normally considered vital to a game in the genre?"
 The idea I decided on was a game where you defeat enemies by ground pounding them and using their shrapnel to kill other enemies. Therefore a "shmup without bullets".

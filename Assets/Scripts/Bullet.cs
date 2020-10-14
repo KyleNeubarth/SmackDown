@@ -11,7 +11,7 @@ public class Bullet : MonoBehaviour
     public int comboNum = 1;
     private Rigidbody rb;
 
-    private float age = 0;
+    public float age = 0;
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -22,7 +22,7 @@ public class Bullet : MonoBehaviour
         rb.velocity = dir*Time.deltaTime*speed*10;
         //transform.position += ;
         age += Time.deltaTime;
-        if (age > 20)
+        if (age > 10)
             Destroy(gameObject);
     }
 

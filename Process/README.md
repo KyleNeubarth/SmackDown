@@ -35,4 +35,5 @@ Need to think about how dangerous it will be when running into enemies, should s
 - Parabola code for the jump: https://www.youtube.com/watch?v=ddakS7BgHRI
 - Jump bar: https://www.youtube.com/watch?v=BLfNP4Sc_iA
 - Probuilder tutorial: https://www.youtube.com/watch?v=YtzIXCKr8Wo
+- Navmesh: https://www.youtube.com/watch?v=CHV1ymlw-P8&vl=en-US
 

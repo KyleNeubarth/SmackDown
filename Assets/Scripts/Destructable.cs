@@ -8,9 +8,9 @@ public class Destructable : MonoBehaviour
 
     public bool interactable = true;
     
-    private void OnCollisionEnter2D(Collision2D other)
+    private void OnCollisionEnter(Collision other)
     {
-        //Debug.Log("hit");
+        Debug.Log("hit");
         
         if ( interactable && other.collider.CompareTag("dangerous"))
         {

@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - dangerous
+  - environment
+  - enemy
   layers:
   - Default
   - TransparentFX
@@ -18,8 +20,8 @@ TagManager:
   - Shockwave
   - Destructible
   - Environment
-  - 
-  - 
+  - OuterEnv
+  - bullet
   - 
   - 
   - 

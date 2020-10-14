@@ -1,14 +1,33 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
     public Vector3 dir;
     public float speed = 5;
+    public int comboNum = 1;
+    private Rigidbody rb;
+
+    private float age = 0;
+    private void Start()
+    {
+        rb = GetComponent<Rigidbody>();
+    }
+
     void Update()
     {
-        GetComponent<Rigidbody2D>().MovePosition(transform.position+dir*Time.deltaTime*speed);
+        rb.velocity = dir*Time.deltaTime*speed*10;
         //transform.position += ;
+        age += Time.deltaTime;
+        if (age > 20)
+            Destroy(gameObject);
+    }
+
+    private void OnCollisionEnter(Collision other)
+    {
+        Destroy(gameObject);
     }
 }

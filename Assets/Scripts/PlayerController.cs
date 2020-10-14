@@ -1,7 +1,10 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -11,6 +14,16 @@ public class PlayerController : MonoBehaviour
     [Header("Char attributes")]
     public float moveSpeed = 1;
 
+
+    public Material hurtMat;
+    
+    public TextMeshProUGUI healthUI;
+    public TextMeshProUGUI scoreUI;
+    public int health = 3;
+    public int score = 0;
+    public float iFrames = 0;
+    public float iTime = 1;
+    
     [Space]
 
     [Header("Jumping")] 
@@ -21,10 +34,10 @@ public class PlayerController : MonoBehaviour
     [Space]
     
     [Header("References")]
-    private Rigidbody2D _rb;
+    private Rigidbody _rb;
     public HealthBar healthBar;
     private GameObject _target;
-    private Rigidbody2D _trb;
+    private Rigidbody _trb;
     private GameObject _shockwave;
     private MeshRenderer _sRenderer;
     //private GameObject _jumpParabola;
@@ -33,13 +46,15 @@ public class PlayerController : MonoBehaviour
     private Transform _pMid;
     private Transform _pEnd;
 
-    private BoxCollider2D _collider;
+    private BoxCollider _collider;
+
+    private float jumpTime = 0;
 
     public void Start()
     {
-        _rb = GetComponent<Rigidbody2D>();
+        _rb = GetComponent<Rigidbody>();
         _target = GameObject.Find("JumpTarget").gameObject;
-        _trb = _target.GetComponent<Rigidbody2D>();
+        _trb = _target.GetComponent<Rigidbody>();
         _target.SetActive(false);
         _shockwave = transform.Find("Shockwave").gameObject;
         _sRenderer = _shockwave.GetComponent<MeshRenderer>();
@@ -50,7 +65,7 @@ public class PlayerController : MonoBehaviour
         _pMid = _jumpParabola.GetChild(1);
         _pEnd = _jumpParabola.GetChild(0);
 
-        _collider = GetComponent<BoxCollider2D>();
+        _collider = GetComponent<BoxCollider>();
     }
     public void Update()
     {
@@ -60,21 +75,35 @@ public class PlayerController : MonoBehaviour
         {
             _jump = Input.GetButton("Jump");
         }
+        scoreUI.text = "Score:" + score;
+        healthUI.text = "Health:" + health;
     }
 
     public void FixedUpdate()
     {
+        if (iFrames >= 0)
+        {
+            iFrames -= Time.deltaTime;
+        }
+
+        if (health == 0)
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
+
         if (jumping == JumpState.GROUNDED)
         {
             _rb.velocity = new Vector2(_h, _v).normalized * moveSpeed;
-
+            
+            //transform.LookAt(transform.position+new Vector3(_h, _v,0).normalized * moveSpeed);
             //proceed with jump
             if (_jump && healthBar.IsFull())
             {
                 _target.SetActive(true);
-                _target.transform.position = transform.position + Vector3.forward * .499f;
+                _target.transform.position = transform.position + Vector3.forward * .45f;
                 _rb.velocity = Vector2.zero;
                 healthBar.direction = -2;
+                Time.timeScale = .5f;
                 jumping = JumpState.PLANNING;
             }
         }
@@ -97,6 +126,8 @@ public class PlayerController : MonoBehaviour
                 _collider.enabled = false;
                 
                 jumping = JumpState.JUMPING;
+                Time.timeScale = 1;
+                jumpTime = 0;
             }
         }
         else if (jumping == JumpState.JUMPING)
@@ -108,8 +139,8 @@ public class PlayerController : MonoBehaviour
                 transform.position = new Vector3(transform.position.x,transform.position.y,0);
                 healthBar.direction = 1;
                 //pController.Speed = 5;
-                iTimer = 1;
                 _shockwave.SetActive(true);
+                iTimer = 1;
                 
                 jumping = JumpState.ENDING;
                 
@@ -126,15 +157,19 @@ public class PlayerController : MonoBehaviour
             }
             else
             {
-                if (pController.Speed == 5 && pController.animationTime > pController.GetDuration()*1f/3f)
+                jumpTime += Time.deltaTime;
+                /*if (pController.Speed == 5 && pController.animationTime > pController.GetDuration()*1f/3f)
                 {
                     pController.Speed = 12;
-                }
+                }*/
             }
         }
         else if (jumping == JumpState.ENDING)
         {
+            transform.position = new Vector3(transform.position.x,transform.position.y,0);
             iTimer -= Time.deltaTime;
+            Debug.Log(jumpTime);
+            _rb.velocity = Vector3.zero;
             _sRenderer.material.color = new Color(_sRenderer.material.color.r,_sRenderer.material.color.g,_sRenderer.material.color.b,iTimer);
             if (iTimer <= 0)
             {
@@ -147,6 +182,17 @@ public class PlayerController : MonoBehaviour
 
         _jump = false;
     }
+
+    private void OnCollisionEnter(Collision other)
+    {
+        if (jumping != JumpState.ENDING && (other.collider.CompareTag("enemy") || other.collider.CompareTag("dangerous")) && iFrames <= 0)
+        {
+            Debug.Log("Ouch");
+            health--;
+            iFrames = iTime;
+        }
+    }
+
 
     public enum JumpState
     {
